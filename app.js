@@ -99,42 +99,50 @@ function(){
         {   
             type: "text",
             _name: "Event Name",
-            val: $scope.selected
+            val: $scope.selected,
+            required: true
         },
         {   
             type: "text",
             _name: "Event host",
-            val: ""
+            val: "",
+            required: true
         },
         {   
             type: "text",
             _name: "Event start date and time",
-            val: ""
+            val: "",
+            required: true
         },
         {   
             type: "text",
             _name: "Event end date and time",
-            val: ""
+            val: "",
+            required: true
         },
         {   
             type: "text",
             _name: "Guest list",
-            val: ""
+            val: "",
+            required: false
         },
         {   
             type: "text",
             _name: "Location",
-            val: ""
+            val: "",
+            required: true
         },
         {   
             type: "text",
             _name: "Description",
-            val: ""
+            val: "",
+            required: true
         },
         {   
             type: "text",
             _name: "(optional) message",
-            val: ""
+            val: "",
+            required: false
         }
     ];
     $scope.create_event_inputs = eventsQuestions;
