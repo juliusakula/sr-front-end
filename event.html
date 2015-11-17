@@ -1,0 +1,16 @@
+<div class="row">
+    <h1 class="text-center"><span class="glyphicon glyphicon-globe"></span> All Events</h1>
+    <hr>
+</div>
+</div>
+<div class="row">
+    <div ng-repeat="event in events" class="col-xs-6">
+        <a><h2 class="text-center"><span class="glyphicon glyphicon-globe"></span> {{event.name}}</h2></a>
+        <h4 class="text-center gold-text">{{event.date}}</h4>
+        <ui-gmap-google-map center="event.map_loc.center" zoom="event.map_loc.zoom" draggable="true">
+            <ui-gmap-marker coords="event.marker_loc.center" idkey="$index">
+        </ui-gmap-marker></ui-gmap-google-map>
+        <h4 class="gold-text text-center">{{event.location}} -- <span>Price: {{event.price | currency:"$"}}</span></h4>
+        <p style="padding: 0 20px 0 20px;">&nbsp;&nbsp;&nbsp;&nbsp;{{event.description}}</p>
+    </div>
+</div>

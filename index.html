@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>KTC, Nov 2015</title>
+
+    <!-- Angular and Angular Bootstrap -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+
+<script src="node_modules/marked/marked.min.js"></script>
+
+<script src="node_modules/angular-builds/angular.js"></script>
+<script src="node_modules/angular-md/dist/angular-md.js"></script>
+<script src="node_modules/angular-strap/dist/angular-strap.min.js"></script>
+<script src="node_modules/angular-strap/dist/angular-strap.tpl.min.js"></script>
+<script src="node_modules/angular-google-maps/node_modules/lodash/index.js"></script>
+<script src="node_modules/angular-google-maps/node_modules/angular-simple-logger/dist/index.js"></script>
+<script src="node_modules/angular-google-maps/dist/angular-google-maps.min.js"></script>
+<script src="app.js"></script>
+
+
+<link href="sidebar-css.css" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+</head>
+<body ng-app="myApp">
+
+
+<div class="navbar navbar-default margin0">
+    <div ng-include="'nav-horizontal.html'"></div>
+</div>
+<div ng-controller="firstArea">
+    <div class="topContainer" id="containerOne">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="text-center extra-top-margin-50">{{welcomeMessage}}</h1>
+            </div>
+            <br><br><br><br><br><br><br><br><br><br>
+            <div class="col-md-offset-1 col-md-3">
+                <div ng-if="selected !== ''"><h1>Enter your information to go to {{selected}}</h1></div>
+            </div>
+            <form class="col-md-offset-3 col-md-4">
+            <div ng-repeat="input in inputs">
+                <div class="form-item">
+                    <input type="{{input.type}}" name="input._name" id="input._name"
+                    ng-required="true"
+                    ng-model="input.val"/>
+                    <label for="input._name">{{input._name}}</label>
+                </div>
+            </div>
+            <div>
+                <div class="form-item">
+                    <input type="submit" value="Sign Up!" class="btn-success"/>
+                    <label for="input._name">{{input._name}}</label>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div ng-controller="eventsArea">
+        <div id="containerTwo" ng-include="'event.html'"></div>
+        <br>
+        <div id="containerThree" ng-include="'create_event.html'"></div>
+    </div>
+</div>
+
+</body>
+</html>

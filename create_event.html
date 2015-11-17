@@ -1,0 +1,15 @@
+<form class="form-group">
+    <div ng-repeat="input in create_event_inputs" class="col-xs-8 col-xs-offset-2">
+        <div class="form-item">
+            <input type="{{input.type}}" name="input._name" id="input._name"
+            ng-required="true"
+            ng-model="create_event_inputs[$index].val"/>
+            <label for="input._name">{{input._name}}</label>
+        </div>
+    </div>
+    <div>
+        <div class="form-item">
+            <input type="submit" value="Create Event!" class="btn-primary"/>
+        </div>
+    </div>
+</form>
