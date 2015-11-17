@@ -1,15 +1,29 @@
-<form class="form-group">
+<br><br>
+<h1 class="text-center">Create your event now!</h1>
+<br><br><br><br>
+<form ng-submit="create_event()">
     <div ng-repeat="input in create_event_inputs" class="col-xs-8 col-xs-offset-2">
-        <div class="form-item">
-            <input type="{{input.type}}" name="input._name" id="input._name"
-            ng-required="true"
-            ng-model="create_event_inputs[$index].val"/>
-            <label for="input._name">{{input._name}}</label>
+        <div ng-if="input.type == 'password'">
+            <div class="form-item">
+                <input type="{{input.type}}" name="input._name" id="input._name"
+                ng-required="true"
+                ng-model="create_event_inputs[$index].val"/>
+                <label for="input._name">{{input._name}}</label>
+                <ul id="strength" check-strength="create_event_inputs[$index].val"></ul>
+            </div>
+        </div>
+        <div ng-if="input.type !== 'password'">
+            <div class="form-item">
+                <input type="{{input.type}}" name="input._name" id="input._name"
+                ng-required="true"
+                ng-model="create_event_inputs[$index].val"/>
+                <label for="input._name">{{input._name}}</label>
+            </div>
         </div>
     </div>
     <div>
-        <div class="form-item">
+        <div>
             <input type="submit" value="Create Event!" class="btn-primary"/>
         </div>
     </div>
-</form>
+</form><br><br>

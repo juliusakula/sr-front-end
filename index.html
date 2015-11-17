@@ -28,7 +28,7 @@
 <link href="styles.css" rel="stylesheet">
 </head>
 <body ng-app="myApp">
-
+<div class="container">
 
 <div class="navbar navbar-default margin0">
     <div ng-include="'nav-horizontal.html'"></div>
@@ -45,11 +45,21 @@
             </div>
             <form class="col-md-offset-3 col-md-4">
             <div ng-repeat="input in inputs">
-                <div class="form-item">
-                    <input type="{{input.type}}" name="input._name" id="input._name"
-                    ng-required="true"
-                    ng-model="input.val"/>
-                    <label for="input._name">{{input._name}}</label>
+                <div ng-if="input.type == 'password'">
+                    <div class="form-item">
+                        <input type="{{input.type}}" name="input._name" id="input._name"
+                        ng-required="true" ng-minlength="8"
+                        ng-model="create_event_inputs[$index].val"/>
+                        <label for="input._name">{{input._name}}</label>
+                    </div>
+                </div>
+                <div ng-if="input.type !== 'password'">
+                    <div class="form-item">
+                        <input type="{{input.type}}" name="input._name" id="input._name"
+                        ng-required="true"
+                        ng-model="input.val"/>
+                        <label for="input._name">{{input._name}}</label>
+                    </div>
                 </div>
             </div>
             <div>
@@ -68,5 +78,6 @@
     </div>
 </div>
 
+</div>
 </body>
 </html>

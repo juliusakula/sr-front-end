@@ -15,13 +15,9 @@ function(){
         return this.selected;
     }
 }
-).controller('secondArea', function($scope, $http){
-    $scope.mdText ="asdf";
-    //$http({method: "GET", url: "md/ktc.md"}).success(function(data, status, headers, config) {
-    //   $scope.mdText = data;
-    //});
-}).controller('eventsArea', function($scope, $http){
-    $scope.events = [{ 
+).service('allEvents',
+function(){
+    this.events = [{ 
             name: "Singapore October Seminar",
             orderId: "E1Singapore",
             location: "Singapore, Singapore",
@@ -54,10 +50,24 @@ function(){
             marker_loc: { center: { latitude: 51.0698569, longitude: -1.7912405 } }, // need seperate marker coords because the map_loc one changes and then the marker always stays in middle of the viewport if you use the same coord variable for both https://github.com/angular-ui/angular-google-maps/issues/1018
             price: 2500, //also must be configured in braintree.php
             link: ""
-        }] 
-        ;
+        }];
+    this.addEvent = function(newVal){
+        this.events.push(newVal);
+        return this.events;
+    }
+    this.getEvents = function(){
+        return this.events;
+    }
+}
+).controller('secondArea', function($scope, $http){
+    $scope.mdText ="asdf";
+    //$http({method: "GET", url: "md/ktc.md"}).success(function(data, status, headers, config) {
+    //   $scope.mdText = data;
+    //});
+}).controller('eventsArea', function($scope, $http, allEvents){
+    $scope.events =  allEvents.events;
     
-}).controller('firstArea', function($scope, selectedTrip){
+}).controller('firstArea', function($scope, selectedTrip, allEvents){
     $scope.welcomeMessage = "You're just five minutes from the best event of your life";
     $scope.i = 0
     $scope.selected =  selectedTrip.selected
@@ -69,7 +79,7 @@ function(){
         },
         {   
             type: "password",
-            _name: "password",
+            _name: "secure password",
             val: ""
         },
         {   
@@ -128,6 +138,45 @@ function(){
     ];
     $scope.create_event_inputs = eventsQuestions;
     $scope.create_event = function(){
-        console.log($scope.create_event_inputs);
+        newObj = {
+            map_loc: { center: { latitude: 51.0698569, longitude: -1.7912405 }, zoom: 12 }, // location of map to zoom
+            marker_loc: { center: { latitude: 51.0698569, longitude: -1.7912405 } }, // need seperate marker coords because the map_loc one changes and then the marker always stays in middle of the viewport if you use the same coord variable for both https://github.com/angular-ui/angular-google-maps/issues/1018
+            price: 2500
+        };
+        /* { 
+            name: "Salisbury Seminar",
+            orderId: "E2Salisbury",
+            location: "Salisubry, England",
+            date: "01-08-2016",
+            shortDescription: "Sample Text seminars human factors and other words about airplanes.",
+            description: "Sample Text seminars human factors and other words about airplanes. Lorem ipsum dolor, sit amet, consectetur adipiscing elit. Aliquam purus ipsum, ornare nec ultricies eu, aliquet eu velit. Nulla venenatis sem a justo volutpat, tincidunt volutpat tortor cursus. Maecenas vestibulum viverra gravida. Morbi non tincidunt odio. Cras viverra tincidunt magna sit amet commodo. Vestibulum mi orci.",
+            map_loc: { center: { latitude: 51.0698569, longitude: -1.7912405 }, zoom: 12 }, // location of map to zoom
+            marker_loc: { center: { latitude: 51.0698569, longitude: -1.7912405 } }, // need seperate marker coords because the map_loc one changes and then the marker always stays in middle of the viewport if you use the same coord variable for both https://github.com/angular-ui/angular-google-maps/issues/1018
+            price: 2500, //also must be configured in braintree.php
+            link: ""
+        } */
+        for(i = 0; i < $scope.create_event_inputs.length; i++){
+            property = $scope.create_event_inputs[i];
+            console.log(property._name + "=" + property.val);
+            if(property._name == 'Event Name'){
+                newObj.name = property.val;
+            }
+            else if(property._name == 'Location'){
+                newObj.location = property.val;
+            }
+            else if(property._name == 'Event start date and time'){
+                newObj.date = property.val;
+            }
+            else if(property._name == 'Description'){
+                newObj.description = property.val;
+            }
+            else if(property._name == '(optional) message'){
+                newObj.shortDescription = property.val;
+            }
+        }
+        console.log(allEvents.events);
+        console.log(newObj);
+        allEvents.addEvent(newObj);
+        console.log(allEvents.events);
     }
 })
