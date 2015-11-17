@@ -70,7 +70,8 @@ function(){
 }).controller('firstArea', function($scope, selectedTrip, allEvents){
     $scope.welcomeMessage = "You're just five minutes from the best event of your life";
     $scope.i = 0
-    $scope.selected =  selectedTrip.selected
+    $scope.selected =  selectedTrip.selected 
+    $scope.shipping_billing = true;
     $scope.inputs = [
         {   
             type: "text",

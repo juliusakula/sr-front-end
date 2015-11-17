@@ -112,3 +112,9 @@
     content: " - not long enough";
     color: red;
 }
+
+.centered-inline-input {
+    width:100%;
+    margin: 0 auto;
+    text-align: center;
+}
